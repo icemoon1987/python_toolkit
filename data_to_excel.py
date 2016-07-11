@@ -23,7 +23,7 @@ def main():
 	row = 0
 	for line in csv_file:
 		line = line.strip().decode("utf-8", "ignore")
-		ary = line.split(",")
+		ary = line.split("\t")
 		col = 0
 
 		for item in ary:
