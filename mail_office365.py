@@ -18,7 +18,7 @@ def sendmail(to_list,subject,content):
     me = mail_user+"<"+mail_user+"@"+mail_postfix+">"
     msg = MIMEMultipart('related')
     msg['Subject'] = email.Header.Header(subject,'utf-8')
-    msg['From'] = me
+    msg['From'] = mail_user
     msg['To'] = ";".join(to_list)
     msg.preamble = 'This is a multi-part message in MIME format.'
     msgAlternative = MIMEMultipart('alternative')
@@ -28,8 +28,9 @@ def sendmail(to_list,subject,content):
     try:
         s = smtplib.SMTP_SSL()
         s.connect(mail_host, 587)
+        s.starttls()
         s.login(mail_user,mail_pwd)
-        s.sendmail(me, to_list, msg.as_string())
+        s.sendmail(mail_user, to_list, msg.as_string())
         s.quit() 
     except Exception,e:
         print e
